@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiEndPoint: "https://osb-assignment-api.herokuapp.com",
+  apiKey: "JamCxYOrl3ZpOQwlJvyrMgykZCmzsmjBoO0INg7LoOhIboGHLz55j6624LmdR3g1"
 };
 
 /*
