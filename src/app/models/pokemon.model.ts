@@ -3,6 +3,7 @@ export interface Pokemon {
     name: string;
     stats: PokemonStats;
     types: string[];
+    image_url: string;
 }
 
 export interface PokemonStats {
