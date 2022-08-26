@@ -11,6 +11,8 @@ import { CataloguePage } from './pages/catalogue/catalogue.page';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { LandingPage } from './pages/landing/landing.page';
 import { RegisterPage } from './pages/register/register.page';
+import { PokemonItemComponent } from './components/pokemon-item/pokemon-item.component';
+import { PokemonListComponent } from './components/pokemon-list/pokemon-list.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { RegisterPage } from './pages/register/register.page';
     CataloguePage,
     LoginFormComponent,
     LandingPage,
-    RegisterPage
+    RegisterPage,
+    PokemonItemComponent,
+    PokemonListComponent
   ],
   imports: [
     BrowserModule,

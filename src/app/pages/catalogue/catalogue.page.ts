@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Pokemon, PokemonResult } from 'src/app/models/pokemon.model';
+import { PokemonCatalogueService } from 'src/app/services/pokemon-catalogue.service';
 
 @Component({
   selector: 'app-catalogue',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CataloguePage implements OnInit {
 
-  constructor() { }
+  get pokemon(): PokemonResult[] {
+    return this.pokemonCatalogueService.pokemon;
+  } 
+
+  get error(): string {
+    return this.pokemonCatalogueService.error;
+  }
+
+  get loading(): boolean {
+    return this.pokemonCatalogueService.loading;
+  }
+
+  constructor(
+    private readonly pokemonCatalogueService: PokemonCatalogueService
+  ) { }
 
   ngOnInit(): void {
+    this.pokemonCatalogueService.findSomePokemon();
   }
 
 }

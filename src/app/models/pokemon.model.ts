@@ -15,3 +15,16 @@ export interface PokemonStats {
     special_defense: number;
     speed: number;
 }
+
+export interface PokemonResponse {
+    count: number;
+    next: string | null;
+    previous: string | null;
+    results: PokemonResult[];
+    length: number;
+}
+
+export interface PokemonResult {
+    name: string;
+    url: string;
+}
