@@ -12,6 +12,8 @@ import { TrainerService } from 'src/app/services/trainer.service';
 })
 export class LoginFormComponent{
 
+  public loading: boolean = false;
+
   @Output() login: EventEmitter<void> = new EventEmitter();
 
   constructor(
@@ -25,12 +27,12 @@ export class LoginFormComponent{
 
     this.loginService.login(username)
       .subscribe({
-        next: (trainer: Trainer) => {
-          this.trainerService.trainer = trainer;
-          this.login.emit();
+        next: (response: Trainer) => {
+          console.log(response);
+          this.loading = false;
         },
         error: () => {
-
+          this.loading = false;
         }
       })
   }
