@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Trainer } from 'src/app/models/trainer.model';
 import { LoginService } from 'src/app/services/login.service';
 import { TrainerService } from 'src/app/services/trainer.service';
@@ -11,6 +10,8 @@ import { TrainerService } from 'src/app/services/trainer.service';
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent{
+
+  public loading: boolean = false;
 
   @Output() login: EventEmitter<void> = new EventEmitter();
 
@@ -25,12 +26,19 @@ export class LoginFormComponent{
 
     this.loginService.login(username)
       .subscribe({
-        next: (trainer: Trainer) => {
-          this.trainerService.trainer = trainer;
-          this.login.emit();
+        next: (response: Trainer[]) => {
+          if(response.length === 0) {
+            console.log("There's no Trainer with that name.");
+          }
+          else {
+            console.log("Logged in!");
+            this.trainerService.trainer = response[0];
+            this.login.emit();
+          }
+          this.loading = false;
         },
         error: () => {
-
+          this.loading = false;
         }
       })
   }
