@@ -21,6 +21,25 @@ export class LoginService {
     return this.http.get(environment.apiTrainers + "?username=" + username)
   }
 
+  /* public login(username: string): Observable<Trainer> {
+
+    // Check if trainer already exists
+    return this.checkTrainerExists(username)
+      .pipe(
+        switchMap((trainer: Trainer | undefined) => {
+
+          // Trainer did not exist; create new trainer
+          if(trainer === undefined) {
+            return this.createTrainer(username);
+          }
+
+          // Trainer already exists; return trainer
+          return of(trainer)
+          
+        })
+      )
+  } */
+
   private createTrainer(username: string): Observable<Trainer> {
     const trainer = {
       username,
