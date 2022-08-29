@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { finalize } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { StorageKeys } from '../enums/storage-keys.enum';
-import { Pokemon, PokemonResponse, PokemonResult } from '../models/pokemon.model';
+import { Pokemon, PokemonResponse } from '../models/pokemon.model';
 import { StorageUtil } from '../utils/storage.utils';
 
 const { apiPokemon } = environment
@@ -13,11 +13,11 @@ const { apiPokemon } = environment
 })
 export class PokemonCatalogueService {
 
-  private _pokemon: PokemonResult[] = [];
+  private _pokemon: Pokemon[] = [];
   private _error: string = "";
   private _loading: boolean = false;
 
-  get pokemon(): PokemonResult[] {
+  get pokemon(): Pokemon[] {
     return this._pokemon;
   }
 
@@ -44,7 +44,16 @@ export class PokemonCatalogueService {
       .subscribe({
         next: (pokemon: PokemonResponse) => {
           StorageUtil.save(StorageKeys.NextPage, pokemon.next);
-          this._pokemon = pokemon.results;
+          for (const newPokemon of pokemon.results) {
+            const pokemonId: number = Number(newPokemon.url.split("/")[6]) || 0;
+            const imageUrl: string = environment.apiImage + pokemonId + ".png";
+            this._pokemon.push({
+              id: pokemonId,
+              name: newPokemon.name,
+              image: imageUrl,
+              url: newPokemon.url
+            })
+          }
           console.log(this._pokemon);
         },
         error: (error: HttpErrorResponse) => {

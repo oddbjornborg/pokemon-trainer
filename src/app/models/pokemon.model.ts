@@ -1,10 +1,8 @@
 export interface Pokemon {
     id: number;
     name: string;
-    stats: PokemonStats;
-    types: string[];
-    ability: string;
-    image_url: string;
+    image: string
+    url: string;
 }
 
 export interface PokemonStats {
