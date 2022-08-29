@@ -2,7 +2,9 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { finalize } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { StorageKeys } from '../enums/storage-keys.enum';
 import { Pokemon, PokemonResponse, PokemonResult } from '../models/pokemon.model';
+import { StorageUtil } from '../utils/storage.utils';
 
 const { apiPokemon } = environment
 
@@ -31,7 +33,7 @@ export class PokemonCatalogueService {
     private readonly http: HttpClient
   ) { }
 
-  public findSomePokemon() {
+  public fetchPokemonOnPageLoad() {
     this._loading = true;
     this.http.get<PokemonResponse>(apiPokemon + "?limit=20&offset=0")
       .pipe(
@@ -41,6 +43,7 @@ export class PokemonCatalogueService {
       )
       .subscribe({
         next: (pokemon: PokemonResponse) => {
+          StorageUtil.save(StorageKeys.NextPage, pokemon.next);
           this._pokemon = pokemon.results;
           console.log(this._pokemon);
         },
