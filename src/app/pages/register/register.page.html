@@ -8,6 +8,8 @@
     
     <p *ngIf="error">{{ error }}</p>
     
+    <p *ngIf="loading">Loading...</p>
+
     <div *ngIf="registered">
         <p>Your account has been registered!</p>
         <a class="text-blue-800 underline" routerLink="/login">Login</a>
