@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from "./guards/auth.guard";
+import { LoginRedirectGuard } from "./guards/login-redirect.guard";
 import { CataloguePage } from "./pages/catalogue/catalogue.page";
 import { LandingPage } from "./pages/landing/landing.page";
 import { LoginPage } from "./pages/login/login.page";
@@ -11,15 +12,18 @@ const routes: Routes = [
     {
         path: "",
         pathMatch: "full",
-        component: LandingPage
+        component: LandingPage,
+        canActivate: [ LoginRedirectGuard ]
     },
     {
         path: "register",
-        component: RegisterPage
+        component: RegisterPage,
+        canActivate: [ LoginRedirectGuard ]
     },
     {
         path: "login",
-        component: LoginPage
+        component: LoginPage,
+        canActivate: [ LoginRedirectGuard ]
     },
     {
         path: "trainer",
