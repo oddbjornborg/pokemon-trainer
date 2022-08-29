@@ -1,1 +1,15 @@
-<p>register works!</p>
+<main class="container mx-auto px-4">
+    <h1 class="text-2xl text-red-700 font-bold">Register a new Account!</h1>
+    
+    <div *ngIf="!registered">
+        <app-register-form></app-register-form>
+        <p>Already have an account? <a class="text-blue-800 underline" routerLink="/login">Login here!</a></p>
+    </div>
+    
+    <p *ngIf="error">{{ error }}</p>
+    
+    <div *ngIf="registered">
+        <p>Your account has been registered!</p>
+        <a class="text-blue-800 underline" routerLink="/login">Login</a>
+    </div>
+</main>

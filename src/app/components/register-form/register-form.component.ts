@@ -10,13 +10,11 @@ import { TrainerService } from 'src/app/services/trainer.service';
 })
 export class RegisterFormComponent {
 
-  public loading: boolean = false;
 
   @Output() register: EventEmitter<void> = new EventEmitter();
 
   constructor(
     private readonly registerService: RegisterService,
-    private readonly trainerService: TrainerService
   ) { }
 
   public registerSubmit(loginForm: NgForm): void {
