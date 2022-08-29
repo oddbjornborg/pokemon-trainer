@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { PokemonResult } from 'src/app/models/pokemon.model';
 
 @Component({
   selector: 'app-pokemon-item',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pokemon-item.component.css']
 })
 export class PokemonItemComponent implements OnInit {
+
+  @Input() pokemon?: PokemonResult = undefined;
 
   constructor() { }
 
