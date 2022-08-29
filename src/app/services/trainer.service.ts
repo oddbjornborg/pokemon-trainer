@@ -38,4 +38,8 @@ export class TrainerService {
     this._pokemon = this._pokemon.filter((pokemon) => pokemon.name !==  name);
     StorageUtil.save<PokemonResult[]>(StorageKeys.PokemonTeam, this._pokemon);
   }
+
+
+
+
 }

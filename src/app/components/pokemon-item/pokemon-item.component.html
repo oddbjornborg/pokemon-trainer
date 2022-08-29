@@ -1,1 +1,18 @@
-<li>{{ pokemon!.name }}</li>
+<li *ngIf="pokemon" class="bg-slate-200 my-4 p-3 shadow rounded flex justify-between items-center">
+    
+    <section class="flex items-center">
+        <img src="assets/img/pokeball.png" alt="pokeball" class=" w-10 h-10" />
+        <img src={{pokemon.image}} alt={{pokemon.name}}/>
+    </section>
+
+    <section class="text-2xl">
+        <span>{{ pokemon!.name }}</span>
+    </section>
+
+    <section>
+        <button type="button" class="mx-2 p-2 bg-slate-500 rounded">Stats</button>
+        <button type="button" class="mx-2 p-2 bg-yellow-500 rounded">I choose you!</button>
+    </section>
+
+
+</li>
