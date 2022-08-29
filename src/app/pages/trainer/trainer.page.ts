@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-trainer',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrainerPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private readonly loginService: LoginService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  public logout() {
+    this.loginService.logout();
   }
 
 }
