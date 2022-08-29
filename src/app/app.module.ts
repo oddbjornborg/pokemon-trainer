@@ -14,6 +14,8 @@ import { RegisterPage } from './pages/register/register.page';
 import { PokemonItemComponent } from './components/pokemon-item/pokemon-item.component';
 import { PokemonListComponent } from './components/pokemon-list/pokemon-list.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
+import { PokemonTeamListComponent } from './components/pokemon-team-list/pokemon-team-list.component';
+import { PokemonTeamItemComponent } from './components/pokemon-team-item/pokemon-team-item.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { RegisterFormComponent } from './components/register-form/register-form.
     RegisterPage,
     PokemonItemComponent,
     PokemonListComponent,
-    RegisterFormComponent
+    RegisterFormComponent,
+    PokemonTeamListComponent,
+    PokemonTeamItemComponent
   ],
   imports: [
     BrowserModule,
