@@ -13,6 +13,7 @@ import { LandingPage } from './pages/landing/landing.page';
 import { RegisterPage } from './pages/register/register.page';
 import { PokemonItemComponent } from './components/pokemon-item/pokemon-item.component';
 import { PokemonListComponent } from './components/pokemon-list/pokemon-list.component';
+import { RegisterFormComponent } from './components/register-form/register-form.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PokemonListComponent } from './components/pokemon-list/pokemon-list.com
     LandingPage,
     RegisterPage,
     PokemonItemComponent,
-    PokemonListComponent
+    PokemonListComponent,
+    RegisterFormComponent
   ],
   imports: [
     BrowserModule,
