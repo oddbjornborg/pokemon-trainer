@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TrainerService } from 'src/app/services/trainer.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  public trainerName: string = ""
+
+  constructor(
+    private readonly trainerService: TrainerService
+  ) { }
 
   ngOnInit(): void {
+    this.trainerName = this.trainerService.trainer!.username
   }
+
+  
+
+
 
 }
