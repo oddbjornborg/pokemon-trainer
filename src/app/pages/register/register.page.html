@@ -1,17 +1,19 @@
-<main class="container mx-auto px-4">
-    <h1 class="text-2xl text-red-700 font-bold">Register a new Account!</h1>
+<main class="container mx-auto px-4 h-screen flex flex-col justify-center items-center gap-8 bg-red-800">
+    <h1 class="text-4xl text-white">Register a new Account!</h1>
     
-    <div *ngIf="!registered">
+    <ng-container *ngIf="!registered; then displayForm else hideForm"></ng-container>
+
+    <ng-template #displayForm>
         <app-register-form></app-register-form>
-        <p>Already have an account? <a class="text-blue-800 underline" routerLink="/login">Login here!</a></p>
-    </div>
+        <p>Already have an account? <a class="text-blue-600 underline" routerLink="/login">Login here!</a></p>
+    </ng-template>
+
+    <ng-template #hideForm>
+        <p>Your account has been registered!</p>
+        <a class="text-blue-600 underline" routerLink="/login">Login</a>
+    </ng-template>
+
     
     <p *ngIf="error">{{ error }}</p>
-    
-    <p *ngIf="loading">Loading...</p>
 
-    <div *ngIf="registered">
-        <p>Your account has been registered!</p>
-        <a class="text-blue-800 underline" routerLink="/login">Login</a>
-    </div>
 </main>

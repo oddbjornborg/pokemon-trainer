@@ -1,13 +1,17 @@
-<form #loginForm="ngForm" (ngSubmit)="loginSubmit(loginForm)">
-    <fieldset class="mb-3">
-        <label for="username" class="block">Username: </label>
+<form class="w-full" #loginForm="ngForm" (ngSubmit)="loginSubmit(loginForm)">
+
+    <fieldset class="mb-3 flex flex-col items-center">
+        <label for="username" class="block">What was your name again?</label>
         <input type="text" 
             ngModel
             #username="ngModel"
             name="username" id="username" 
             placeholder="johndoe" 
-            class="border border-slate-300 p-2 rounded w-2/4">
+            class="border border-slate-300 p-2 rounded w-full">
     </fieldset>
 
-    <button type="submit" class="bg-orange-500 hover:bg-orange-400 p-2 rounded">Login</button>
+    <div class="flex flex-row justify-center">
+        <button type="submit" class="bg-red-700 ring-2 ring-white hover:bg-white hover:text-red-700 py-2 px-4 rounded">Log In</button>
+    </div>
+
 </form>

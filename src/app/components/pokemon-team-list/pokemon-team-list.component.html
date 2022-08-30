@@ -1,3 +1,5 @@
-<ul class="max-h-full overflow-y-scroll">
+<ul class="max-h-full min-h-full overflow-y-scroll">
     <app-pokemon-team-item *ngFor="let pokemon of pokemonTeam" [pokemon]="pokemon"></app-pokemon-team-item>
+
+    <p *ngIf="pokemonTeam.length === 0">Your team is empty!</p>
 </ul>

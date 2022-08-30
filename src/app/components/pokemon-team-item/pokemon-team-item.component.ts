@@ -9,6 +9,12 @@ import { TrainerService } from 'src/app/services/trainer.service';
 })
 export class PokemonTeamItemComponent implements OnInit {
 
+  private _beingRemoved: boolean = false;
+
+  get beingRemoved(): boolean {
+    return this._beingRemoved;
+  }
+
   @Input() pokemon?: Pokemon;
 
   constructor(
@@ -19,7 +25,10 @@ export class PokemonTeamItemComponent implements OnInit {
   }
 
   public removeOnClick(pokemon: Pokemon) {
-    this.trainerService.removePokemon(pokemon.name);
+    this._beingRemoved = true;
+    setTimeout(() => {
+      this.trainerService.removePokemon(pokemon.name);
+    }, 500);
   }
 
 }
