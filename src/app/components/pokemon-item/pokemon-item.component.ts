@@ -23,7 +23,7 @@ export class PokemonItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.isFavorite = this.trainerService.inFavorites(this.pokemon!.name)
+    this.isFavorite = this.trainerService.inTeam(this.pokemon!.name)
   }
 
   onIChooseYouClick() : void {
@@ -32,7 +32,7 @@ export class PokemonItemComponent implements OnInit {
     this.favoritesService.addToFavorites(this.pokemon!.name).subscribe({
       next: ()=> {
         this.loading = false;
-        this.isFavorite = this.trainerService.inFavorites(this.pokemon!.name)
+        this.isFavorite = this.trainerService.inTeam(this.pokemon!.name)
 
       },
       error: (error: HttpErrorResponse) =>{

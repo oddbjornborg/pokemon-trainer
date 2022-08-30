@@ -43,21 +43,27 @@ export class TrainerService {
   }
 
   constructor(
-    private readonly pokemonTeamService: PokemonTeamService,
     private readonly http: HttpClient
   ) {
     this._trainer = StorageUtil.read<Trainer>(StorageKeys.Trainer);
   }
 
   public addPokemon(pokemon: Pokemon) {
-    this._pokemon.push(pokemon);
-    StorageUtil.save<Pokemon[]>(StorageKeys.PokemonTeam, this._pokemon);
+    if(this._trainer) {
+      this._pokemon.push(pokemon);
+      this._trainer.pokemon.push(pokemon.name);
+      StorageUtil.save<Pokemon[]>(StorageKeys.PokemonTeam, this._pokemon);
+    }
   }
 
   public removePokemon(name: string) {
-    this._pokemon = this._pokemon.filter((pokemon) => pokemon.name !== name);
-    StorageUtil.save<Pokemon[]>(StorageKeys.PokemonTeam, this._pokemon);
+    if(this._trainer) {
+      this._pokemon = this._pokemon.filter((pokemon) => pokemon.name !== name);
+      this._trainer.pokemon = this._trainer.pokemon.filter(pokemonName => pokemonName !== name);
+      StorageUtil.save<Pokemon[]>(StorageKeys.PokemonTeam, this._pokemon);
+    }
   }
+
   public removeTrainerStorage(): void {
     sessionStorage.removeItem(StorageKeys.Trainer);
     sessionStorage.removeItem(StorageKeys.PokemonTeam);
@@ -71,5 +77,14 @@ export class TrainerService {
     for (const singlePokemon of pokemon) {
       
     }
+  }
+
+  public inTeam(name: string): boolean {
+    if(this._trainer) {
+      return Boolean(
+        this._trainer.pokemon.find((pokemonName) => pokemonName === name)
+      );
+    } 
+    return false;
   }
 }

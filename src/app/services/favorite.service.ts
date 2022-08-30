@@ -30,9 +30,11 @@ export class FavoriteService {
       throw new Error('addToFavorites: No pokemon with id: ' + name);
     }
 
-    if (this.trainerService.inFavorites(name)) {
+    if (this.trainerService.inTeam(name)) {
+      console.log("Pokemon already in team; removed from team.")
       this.trainerService.removePokemon(name);
     } else {
+      console.log("Added pokemon to team!")
       this.trainerService.addPokemon(pokemon);
     }
 

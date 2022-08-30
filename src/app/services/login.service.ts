@@ -21,8 +21,8 @@ export class LoginService {
     private readonly trainerService: TrainerService
     ) { }
 
-  public login(username: string) {
-    this.http.get<Trainer[]>(environment.apiTrainers + "?username=" + username)
+  public login(username: string): Observable<Trainer[]> {
+    return this.http.get<Trainer[]>(environment.apiTrainers + "?username=" + username)
   }
 
   public logout() {
