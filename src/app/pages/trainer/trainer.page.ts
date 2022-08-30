@@ -15,7 +15,20 @@ export class TrainerPage implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.trainerService.getPokemonTeam();
+    if(this.trainerService.pokemonTracker !== this.trainerService.trainer?.pokemon) {
+      console.log("Team changed, invalidated cached data")
+      this.trainerService.hasCachedData = false;
+    }
+
+    if(this.trainerService.hasCachedData === false) {
+      console.log("No cached data; sending data requests")
+      this.trainerService.getPokemonTeam();
+      this.trainerService.pokemonTracker = this.trainerService.trainer!.pokemon;
+      this.trainerService.hasCachedData = true;
+    }
+    else{
+      console.log("Found data cache, no requests sent")
+    }
   }
 
   public logout() {
