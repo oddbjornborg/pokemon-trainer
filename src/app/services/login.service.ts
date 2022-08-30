@@ -22,7 +22,7 @@ export class LoginService {
     ) { }
 
   public login(username: string) {
-    return this.http.get<Trainer[]>(environment.apiTrainers + "?username=" + username)
+    this.http.get<Trainer[]>(environment.apiTrainers + "?username=" + username)
   }
 
   public logout() {

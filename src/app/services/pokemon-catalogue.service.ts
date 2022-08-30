@@ -59,7 +59,6 @@ export class PokemonCatalogueService {
         error: (error: HttpErrorResponse) => {
           this._error = error.message;
         }
-      }
-      )
+      })
   }
 }

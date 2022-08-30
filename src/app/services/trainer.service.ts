@@ -1,11 +1,13 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { StorageKeys } from '../enums/storage-keys.enum';
 import { Pokemon } from '../models/pokemon.model';
 import { Trainer } from '../models/trainer.model';
 import { StorageUtil } from '../utils/storage.utils';
+import { PokemonTeamService } from './pokemon-team.service';
 
-const { apiImage } = environment;
+const { apiImage, apiTrainers } = environment;
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +43,10 @@ export class TrainerService {
     return this._pokemon;
   }
 
-  constructor() {
+  constructor(
+    private readonly pokemonTeamService: PokemonTeamService,
+    private readonly http: HttpClient
+  ) {
     this._trainer = StorageUtil.read<Trainer>(StorageKeys.Trainer);
   }
 
@@ -60,5 +65,13 @@ export class TrainerService {
     sessionStorage.removeItem(StorageKeys.PokemonTeam);
     this._pokemon = [];
     this._trainer = undefined;
+  }
+
+  private getPokemonTeam(): void {
+    const { pokemon } = this.trainer!;
+
+    for (const singlePokemon of pokemon) {
+      
+    }
   }
 }
