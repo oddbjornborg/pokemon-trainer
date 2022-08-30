@@ -1,33 +1,19 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { StorageKeys } from '../enums/storage-keys.enum';
-import { Pokemon } from '../models/pokemon.model';
+import { Pokemon, PokemonByNameResponse } from '../models/pokemon.model';
 import { Trainer } from '../models/trainer.model';
 import { StorageUtil } from '../utils/storage.utils';
-import { PokemonTeamService } from './pokemon-team.service';
 
-const { apiImage, apiTrainers } = environment;
+const { apiPokemon } = environment;
 
 @Injectable({
   providedIn: 'root',
 })
 export class TrainerService {
   private _trainer?: Trainer;
-  private _pokemon: Pokemon[] = [
-    {
-      id: 1,
-      name: 'bulbasaur',
-      image: apiImage + '1.png',
-      url: 'https://pokeapi.co/api/v2/pokemon/1/',
-    },
-    {
-      id: 4,
-      name: 'charmander',
-      image: apiImage + '4.png',
-      url: 'https://pokeapi.co/api/v2/pokemon/4/',
-    },
-  ];
+  private _pokemon: Pokemon[] = [];
 
   get trainer(): Trainer | undefined {
     return this._trainer;
@@ -43,7 +29,7 @@ export class TrainerService {
   }
 
   constructor(
-    private readonly http: HttpClient
+    private readonly http: HttpClient,
   ) {
     this._trainer = StorageUtil.read<Trainer>(StorageKeys.Trainer);
   }
@@ -71,11 +57,11 @@ export class TrainerService {
     this._trainer = undefined;
   }
 
-  private getPokemonTeam(): void {
+  public getPokemonTeam(): void {
     const { pokemon } = this.trainer!;
 
     for (const singlePokemon of pokemon) {
-      
+      this.addPokemonToTeamByName(singlePokemon);
     }
   }
 
@@ -86,5 +72,28 @@ export class TrainerService {
       );
     } 
     return false;
+  }
+
+  private addPokemonToTeamByName(name: string) {
+
+    const url = apiPokemon + "/" + name;
+
+    this.http.get<PokemonByNameResponse>(url)
+      .subscribe({
+        next: (response: PokemonByNameResponse) => {
+          const { id, name } = response;
+          const { front_default: image } = response.sprites;
+
+          this.addPokemon({
+            id,
+            name,
+            image,
+            url
+          })
+        },
+        error: (err: HttpErrorResponse) => {
+          console.log(err);
+        }
+      })
   }
 }
