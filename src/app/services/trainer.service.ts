@@ -10,24 +10,23 @@ import { PokemonTeamService } from './pokemon-team.service';
 const { apiImage, apiTrainers } = environment;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TrainerService {
-
   private _trainer?: Trainer;
   private _pokemon: Pokemon[] = [
     {
       id: 1,
-      name: "bulbasaur",
-      image: apiImage + "1.png",
-      url: "https://pokeapi.co/api/v2/pokemon/1/"
+      name: 'bulbasaur',
+      image: apiImage + '1.png',
+      url: 'https://pokeapi.co/api/v2/pokemon/1/',
     },
     {
       id: 4,
-      name: "charmander",
-      image: apiImage + "4.png",
-      url: "https://pokeapi.co/api/v2/pokemon/4/"
-    }
+      name: 'charmander',
+      image: apiImage + '4.png',
+      url: 'https://pokeapi.co/api/v2/pokemon/4/',
+    },
   ];
 
   get trainer(): Trainer | undefined {
@@ -56,10 +55,9 @@ export class TrainerService {
   }
 
   public removePokemon(name: string) {
-    this._pokemon = this._pokemon.filter((pokemon) => pokemon.name !==  name);
+    this._pokemon = this._pokemon.filter((pokemon) => pokemon.name !== name);
     StorageUtil.save<Pokemon[]>(StorageKeys.PokemonTeam, this._pokemon);
   }
-
   public removeTrainerStorage(): void {
     sessionStorage.removeItem(StorageKeys.Trainer);
     sessionStorage.removeItem(StorageKeys.PokemonTeam);
