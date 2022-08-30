@@ -58,4 +58,18 @@ export class TrainerService {
     this._pokemon = this._pokemon.filter((pokemon) => pokemon.name !== name);
     StorageUtil.save<Pokemon[]>(StorageKeys.PokemonTeam, this._pokemon);
   }
+  public removeTrainerStorage(): void {
+    sessionStorage.removeItem(StorageKeys.Trainer);
+    sessionStorage.removeItem(StorageKeys.PokemonTeam);
+    this._pokemon = [];
+    this._trainer = undefined;
+  }
+
+  private getPokemonTeam(): void {
+    const { pokemon } = this.trainer!;
+
+    for (const singlePokemon of pokemon) {
+      
+    }
+  }
 }
