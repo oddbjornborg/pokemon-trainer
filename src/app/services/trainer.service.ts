@@ -15,6 +15,9 @@ export class TrainerService {
   private _trainer?: Trainer;
   private _pokemon: Pokemon[] = [];
 
+  public hasCachedData: boolean = false;
+  public pokemonTracker: string[] = [];
+
   get trainer(): Trainer | undefined {
     return this._trainer;
   }
