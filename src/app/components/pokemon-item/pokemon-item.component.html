@@ -1,8 +1,9 @@
 <li *ngIf="pokemon" class="bg-slate-200 my-4 p-3 shadow rounded flex justify-between items-center">
-    
+
     <section class="flex items-center">
-        <img src="assets/img/pokeball.png" alt="pokeball" class=" w-10 h-10" />
-        <img src={{pokemon.image}} alt={{pokemon.name}}/>
+        <img src={{pokemon.image}} alt={{pokemon.name}} />
+        <img *ngIf="isFavorite" src="assets/img/pokeball.png" alt="pokeball"
+            class="w-10 h-10 animate__animated animate__bounceInRight" />
     </section>
 
     <section class="text-2xl">
@@ -10,8 +11,19 @@
     </section>
 
     <section>
+
         <button type="button" class="mx-2 p-2 bg-slate-500 rounded">Stats</button>
-        <button (click)="onIChooseYouClick()" class="mx-2 p-2 bg-yellow-500 rounded">I choose you!</button>
+
+        <ng-container *ngIf="isFavorite; then removeFromTeam else addToTeam"></ng-container>
+        <ng-template #addToTeam>
+            <button (click)="onIChooseYouClick()" class="mx-2 p-2 bg-yellow-500 rounded">I choose you!</button>
+        </ng-template>
+        <ng-template #removeFromTeam>
+            <button (click)="onIChooseYouClick()" class="mx-2 p-2 bg-yellow-500 rounded">Dispatch from team
+            </button>
+        </ng-template>
+
+
     </section>
 
 
