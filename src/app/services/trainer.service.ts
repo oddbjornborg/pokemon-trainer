@@ -39,6 +39,7 @@ export class TrainerService {
       this._pokemon.push(pokemon);
       this._trainer.pokemon.push(pokemon.name);
       StorageUtil.save<Pokemon[]>(StorageKeys.PokemonTeam, this._pokemon);
+      StorageUtil.save<Trainer>(StorageKeys.Trainer, this._trainer);
     }
   }
 
@@ -47,6 +48,7 @@ export class TrainerService {
       this._pokemon = this._pokemon.filter((pokemon) => pokemon.name !== name);
       this._trainer.pokemon = this._trainer.pokemon.filter(pokemonName => pokemonName !== name);
       StorageUtil.save<Pokemon[]>(StorageKeys.PokemonTeam, this._pokemon);
+      StorageUtil.save<Trainer>(StorageKeys.Trainer, this._trainer);
     }
   }
 
@@ -59,6 +61,9 @@ export class TrainerService {
 
   public getPokemonTeam(): void {
     const { pokemon } = this.trainer!;
+
+    this._trainer!.pokemon = [];
+    this._pokemon = [];
 
     for (const singlePokemon of pokemon) {
       this.addPokemonToTeamByName(singlePokemon);
