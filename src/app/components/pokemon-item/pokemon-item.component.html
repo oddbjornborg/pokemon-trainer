@@ -12,14 +12,14 @@
 
     <section>
 
-        <button type="button" class="mx-2 p-2 bg-slate-500 rounded">Stats</button>
+        <button type="button" class="mx-2 p-2 bg-green-600 rounded">Stats</button>
 
         <ng-container *ngIf="isFavorite; then removeFromTeam else addToTeam"></ng-container>
         <ng-template #addToTeam>
-            <button (click)="onIChooseYouClick()" class="mx-2 p-2 bg-yellow-500 rounded">I choose you!</button>
+            <button (click)="onIChooseYouClick()" class="mx-2 p-2 bg-blue-600 rounded">I choose you!</button>
         </ng-template>
         <ng-template #removeFromTeam>
-            <button (click)="onIChooseYouClick()" class="mx-2 p-2 bg-yellow-500 rounded">Dispatch from team
+            <button (click)="onIChooseYouClick()" class="mx-2 p-2 bg-red-600 rounded">Dispatch from team
             </button>
         </ng-template>
 
