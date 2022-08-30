@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { StorageKeys } from '../enums/storage-keys.enum';
-import { PokemonResult } from '../models/pokemon.model';
+import { Pokemon } from '../models/pokemon.model';
 import { Trainer } from '../models/trainer.model';
 import { StorageUtil } from '../utils/storage.utils';
+
+const { apiImage } = environment;
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +13,20 @@ import { StorageUtil } from '../utils/storage.utils';
 export class TrainerService {
 
   private _trainer?: Trainer;
-  private _pokemon: PokemonResult[] = [];
+  private _pokemon: Pokemon[] = [
+    {
+      id: 1,
+      name: "bulbasaur",
+      image: apiImage + "1.png",
+      url: "https://pokeapi.co/api/v2/pokemon/1/"
+    },
+    {
+      id: 4,
+      name: "charmander",
+      image: apiImage + "4.png",
+      url: "https://pokeapi.co/api/v2/pokemon/4/"
+    }
+  ];
 
   get trainer(): Trainer | undefined {
     return this._trainer;
@@ -21,7 +37,7 @@ export class TrainerService {
     this._trainer = trainer;
   }
 
-  get pokemon(): PokemonResult[] {
+  get pokemon(): Pokemon[] {
     return this._pokemon;
   }
 
@@ -29,14 +45,14 @@ export class TrainerService {
     this._trainer = StorageUtil.read<Trainer>(StorageKeys.Trainer);
   }
 
-  public addPokemon(pokemon: PokemonResult) {
+  public addPokemon(pokemon: Pokemon) {
     this._pokemon.push(pokemon);
-    StorageUtil.save<PokemonResult[]>(StorageKeys.PokemonTeam, this._pokemon);
+    StorageUtil.save<Pokemon[]>(StorageKeys.PokemonTeam, this._pokemon);
   }
 
   public removePokemon(name: string) {
     this._pokemon = this._pokemon.filter((pokemon) => pokemon.name !==  name);
-    StorageUtil.save<PokemonResult[]>(StorageKeys.PokemonTeam, this._pokemon);
+    StorageUtil.save<Pokemon[]>(StorageKeys.PokemonTeam, this._pokemon);
   }
 
 
