@@ -3,3 +3,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'Emerald';
+    src: url(./fonts/pokemon5x9.ttf);
+}

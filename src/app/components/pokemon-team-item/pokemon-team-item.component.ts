@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Pokemon } from 'src/app/models/pokemon.model';
+import { TrainerService } from 'src/app/services/trainer.service';
 
 @Component({
   selector: 'app-pokemon-team-item',
@@ -10,17 +11,15 @@ export class PokemonTeamItemComponent implements OnInit {
 
   @Input() pokemon?: Pokemon;
 
-  constructor() { }
+  constructor(
+    private readonly trainerService: TrainerService
+  ) { }
 
   ngOnInit(): void {
-    if(!this.pokemon) {
-      this.pokemon = {
-        id: 0,
-        name: "missingNo",
-        image: "none",
-        url: "none"
-      }
-    }
+  }
+
+  public removeOnClick(pokemon: Pokemon) {
+    this.trainerService.removePokemon(pokemon.name);
   }
 
 }

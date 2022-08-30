@@ -26,3 +26,11 @@ export interface PokemonResult {
     name: string;
     url: string;
 }
+
+export interface PokemonByNameResponse {
+    id: number;
+    name: string;
+    sprites: {
+        front_default: string
+    };
+}
