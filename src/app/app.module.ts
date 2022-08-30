@@ -18,6 +18,7 @@ import { PokemonTeamListComponent } from './components/pokemon-team-list/pokemon
 import { PokemonTeamItemComponent } from './components/pokemon-team-item/pokemon-team-item.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TrainerComponent } from './components/trainer/trainer.component';
+import { PokemonStatsComponent } from './components/pokemon-stats/pokemon-stats.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { TrainerComponent } from './components/trainer/trainer.component';
     PokemonTeamListComponent,
     PokemonTeamItemComponent,
     NavbarComponent,
-    TrainerComponent
+    TrainerComponent,
+    PokemonStatsComponent
   ],
   imports: [
     BrowserModule,
