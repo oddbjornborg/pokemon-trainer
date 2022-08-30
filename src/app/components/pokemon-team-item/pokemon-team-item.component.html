@@ -1,17 +1,19 @@
-<div class="relative h-28 w-auto bg-red-600 m-4 rounded-full shadow-slate-800 shadow-lg min-w-fit hover:ring-4 ring-white">
+<div class="relative h-28 w-auto bg-red-600 mx-4 my-6 rounded-full drop-shadow-xl min-w-fit 
+    ring-4 ring-red-700 hover:ring-white">
     
     <div class="absolute top-0 bottom-0 flex flex-row justify-center w-full">
+        <!-- Pokemon Name -->
         <p class="text-white text-3xl font-sans uppercase my-auto">{{ pokemon!.name }}</p>
     </div>
 
     <div class="absolute top-0 bottom-0 w-full h-28 flex flex-row gap-3 justify-between min-w-fit">
-    
+        <!-- Pokemon Sprite -->
         <div class="h-full flex flex-col justify-center">
-            <img src="{{pokemon!.image}}" alt="pokemon" class="h-36 table shadow-red-900 drop-shadow-sm">
+            <img src="{{pokemon!.image}}" alt="pokemon" class="h-36 table">
         </div>
-    
+        <!-- Remove Button -->
         <button type="button" (click)="removeOnClick(pokemon!)"
-            class="h-28 w-28 min-w-28 rounded-full border-0 border-white text-sm text-white bg-red-700 hover:bg-red-300"
+            class="h-28 w-28 min-w-28 rounded-full text-sm text-white ring-red-700 hover:ring-white bg-red-700 hover:bg-red-300"
             >REMOVE</button>
     </div>
     
