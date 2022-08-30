@@ -62,4 +62,10 @@ export class PokemonCatalogueService {
       }
       )
   }
+
+ 
+  public pokemonByName(name: string): Pokemon | undefined {
+    return this._pokemon.find((pokemon: Pokemon) => pokemon.name === name)
+  }
+ 
 }
