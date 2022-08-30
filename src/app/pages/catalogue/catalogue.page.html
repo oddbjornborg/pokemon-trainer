@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<main class="container mx-auto p-4">
-    <p *ngIf="loading">Loading...</p>
-    <app-pokemon-list [pokemon]="pokemon"></app-pokemon-list>
+<main class="flex bg-red-800 w-screen mx-auto px-4 space-x-5">
+    <app-pokemon-list [pokemon]="pokemon" class="w-1/2"></app-pokemon-list>
+    <app-pokemon-stats></app-pokemon-stats>
 </main>
