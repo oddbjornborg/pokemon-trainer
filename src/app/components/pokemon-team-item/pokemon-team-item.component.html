@@ -1,5 +1,5 @@
 <div [ngClass]="{'animate__animated animate__fadeOutRight': beingRemoved}" 
-    class="relative h-24 w-auto bg-red-600 mx-4 my-6 rounded-full drop-shadow-xl min-w-fit ring-4 ring-red-700 hover:ring-white">
+    class="relative h-24 w-auto bg-red-600 mx-4 my-6 rounded-full drop-shadow-xl min-w-fit ring-4 ring-red-700 hover:ring-white transition-all duration-300">
     
     <div class="absolute top-0 bottom-0 flex flex-row justify-center w-full">
         <!-- Pokemon Name -->
@@ -13,7 +13,7 @@
         </div>
         <!-- Remove Button -->
         <button type="button" (click)="removeOnClick(pokemon!)"
-            class="h-24 w-24 rounded-full text-sm text-white ring-red-700 hover:ring-white bg-red-700 hover:bg-red-400">
+            class="h-24 w-24 rounded-full text-sm text-white ring-red-700 hover:ring-white bg-red-700 hover:bg-red-400 transition-all duration-300">
             REMOVE
         </button>
     </div>
