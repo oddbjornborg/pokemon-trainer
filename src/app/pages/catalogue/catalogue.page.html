@@ -1,6 +1,8 @@
-<app-navbar></app-navbar>
-<main class="bg-red-800 mx-auto px-4 overflow-hidden">
-    <app-pagination-menu [paginationElements]="paginationElements" (pageClicked)="getNewPage($event)"></app-pagination-menu>
-    <app-pokemon-list [pokemon]="pokemon" class="w-full h-full"></app-pokemon-list>
-    <app-pagination-menu [paginationElements]="paginationElements" (pageClicked)="getNewPage($event)"></app-pagination-menu>
+<main class="h-screen w-full flex flex-col justify-start">
+    <app-navbar class="max-h-1/10"></app-navbar>
+    <div class="bg-red-800 px-4 max-h-9/10 overflow-y-scroll">
+        <app-pagination-menu [paginationElements]="paginationElements" (pageClicked)="getNewPage($event)"></app-pagination-menu>
+        <app-pokemon-list [pokemon]="pokemon"></app-pokemon-list>
+        <app-pagination-menu [paginationElements]="paginationElements" (pageClicked)="getNewPage($event)"></app-pagination-menu>
+    </div>
 </main>
