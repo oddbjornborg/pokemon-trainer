@@ -1,11 +1,11 @@
-<main class="flex flex-col items-center">
+<main class="flex flex-col items-center gap-12 m-4">
     <div>
-        <p>IMAGE</p>
+        <img class="h-72" src="assets/img/pokemon_trainer_emerald.png" alt="trainer avatar">
     </div>
     <div>
-        <p class="text-2xl text-white">{{ trainerName }}</p>
+        <p class="text-4xl text-white">{{ trainerName }}</p>
     </div>
     <div>
-        <button type="button" (click)="logoutOnClick()">Logout</button>
+        <button type="button" (click)="logoutOnClick()" class="bg-red-700 ring-2 ring-white hover:bg-white text-white hover:text-red-700 py-2 px-4 rounded">Logout</button>
     </div>
 </main>
