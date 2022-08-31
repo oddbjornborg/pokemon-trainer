@@ -47,21 +47,21 @@ export class PokemonItemComponent implements OnInit {
 
   onIChooseYouClick() : void {
     this.loading = true;
-
-    if(this.isInTeam) {
-      this._buttonState = ButtonState.BeingRemoved;
-      setTimeout(() => {
-        this._buttonState = ButtonState.Hidden;
-      }, 250);
-    }
-
     this.isInTeam = !this.isInTeam;
 
+    // Animate adding pokeball
     if(this.isInTeam) {
       this._buttonState = ButtonState.BeingAdded;
       setTimeout(() => {
         this._buttonState = ButtonState.Present;
       }, 1000)
+    } 
+    // Animate pokeball removal
+    else {
+      this._buttonState = ButtonState.BeingRemoved;
+      setTimeout(() => {
+        this._buttonState = ButtonState.Hidden;
+      }, 250);
     }
 
     this.favoritesService.addToFavorites(this.pokemon!.name)
