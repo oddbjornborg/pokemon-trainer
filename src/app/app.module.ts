@@ -19,7 +19,7 @@ import { PokemonTeamItemComponent } from './components/pokemon-team-item/pokemon
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TrainerComponent } from './components/trainer/trainer.component';
 import { PokemonStatsComponent } from './components/pokemon-stats/pokemon-stats.component';
-import { SummaryPage } from './pages/summary/summary.page';
+import { PaginationMenuComponent } from './components/pagination-menu/pagination-menu.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,7 @@ import { SummaryPage } from './pages/summary/summary.page';
     NavbarComponent,
     TrainerComponent,
     PokemonStatsComponent,
-    SummaryPage
+    PaginationMenuComponent
   ],
   imports: [
     BrowserModule,

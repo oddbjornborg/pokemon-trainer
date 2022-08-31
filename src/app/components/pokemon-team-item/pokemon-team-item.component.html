@@ -6,10 +6,10 @@
         <p class="text-white text-3xl font-sans uppercase my-auto">{{ pokemon!.name }}</p>
     </div>
 
-    <div class="absolute top-0 bottom-0 w-full h-28 flex flex-row gap-3 justify-between min-w-fit">
+    <div class="absolute top-0 bottom-0 w-full h-24 flex flex-row gap-3 justify-between min-w-fit">
         <!-- Pokemon Sprite -->
         <div class="h-full flex flex-col justify-center">
-            <img src="{{pokemon!.image}}" alt="pokemon" class="h-28 table">
+            <img src="{{pokemon!.image}}" alt="pokemon" class="h-24 table">
         </div>
         <!-- Remove Button -->
         <button type="button" (click)="removeOnClick(pokemon!)"

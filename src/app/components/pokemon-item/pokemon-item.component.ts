@@ -28,7 +28,7 @@ export class PokemonItemComponent implements OnInit {
   }
 
   get isVisible(): boolean {
-    return this._buttonState !== ButtonState.Hidden
+    return this._buttonState !== ButtonState.Hidden;
   }
 
   get isBeingAdded(): boolean {
@@ -44,29 +44,30 @@ export class PokemonItemComponent implements OnInit {
     private readonly summaryService: PokemonSummaryService
   ) { }
 
-  ngOnInit( ): void {
+  ngOnInit(): void {
     this.isInTeam = this.trainerService.inTeam(this.pokemon!.name)
+
     this._buttonState = this.isInTeam ? ButtonState.Present : ButtonState.Hidden;
     
   }
 
   onIChooseYouClick() : void {
     this.loading = true;
-
-    if(this.isInTeam) {
-      this._buttonState = ButtonState.BeingRemoved;
-      setTimeout(() => {
-        this._buttonState = ButtonState.Hidden;
-      }, 250);
-    }
-
     this.isInTeam = !this.isInTeam;
 
+    // Animate adding pokeball
     if(this.isInTeam) {
       this._buttonState = ButtonState.BeingAdded;
       setTimeout(() => {
         this._buttonState = ButtonState.Present;
       }, 1000)
+    } 
+    // Animate pokeball removal
+    else {
+      this._buttonState = ButtonState.BeingRemoved;
+      setTimeout(() => {
+        this._buttonState = ButtonState.Hidden;
+      }, 250);
     }
 
     this.favoritesService.addToFavorites(this.pokemon!.name)
@@ -80,7 +81,7 @@ export class PokemonItemComponent implements OnInit {
           this.isInTeam = this.trainerService.inTeam(this.pokemon!.name)
         },
         error: (error: HttpErrorResponse) =>{
-          console.log('ERROR', error.message)
+          console.log('ERROR', error.message);
         }
       })
   }

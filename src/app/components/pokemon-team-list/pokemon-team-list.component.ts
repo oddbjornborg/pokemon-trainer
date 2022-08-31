@@ -18,7 +18,6 @@ export class PokemonTeamListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log("Pokemon team:" + this.pokemonTeam);
   }
 
 }

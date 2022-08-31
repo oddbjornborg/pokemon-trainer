@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { StorageKeys } from '../enums/storage-keys.enum';
 import { Pokemon, PokemonResponse } from '../models/pokemon.model';
 import { StorageUtil } from '../utils/storage.utils';
+import { PaginationService } from './pagination.service';
 
 const { apiPokemon } = environment
 
@@ -14,13 +15,11 @@ const { apiPokemon } = environment
 export class PokemonCatalogueService {
 
   private _pokemon: Pokemon[] = [];
-  private _lastAccessedPage: number | undefined;
-  private _limit: number = 20;
   private _error: string = "";
   private _loading: boolean = false;
 
   get lastAccessedPage(): number | undefined {
-    return this._lastAccessedPage;
+    return this.paginationService.lastAccessedPage;
   }
 
   get pokemon(): Pokemon[] {
@@ -36,19 +35,24 @@ export class PokemonCatalogueService {
   }
 
   constructor(
-    private readonly http: HttpClient
+    private readonly http: HttpClient,
+    private readonly paginationService: PaginationService
   ) { }
 
   public fetchPokemonPage(currentPage: number) {
 
-    if(this._lastAccessedPage !== undefined && this._lastAccessedPage === currentPage) {
+    this.paginationService.currentPage = currentPage;
+
+    if(this.paginationService.pageIsCached()) {
+      console.log("Catalogue >> Data cache loaded")
       return;
     }
+    console.log("Catalogue >> No cache found")
 
-    this._lastAccessedPage = currentPage;
+    this.paginationService.updateLastAccessedPage();
     this._loading = true;
 
-    this.http.get<PokemonResponse>(apiPokemon + "?limit=" + this._limit + "&offset=" + this._limit * currentPage)
+    this.http.get<PokemonResponse>(apiPokemon + "?limit=" + this.paginationService.limit + "&offset=" + this.paginationService.offset)
       .pipe(
         finalize(() => {
           this._loading = false;
@@ -56,18 +60,22 @@ export class PokemonCatalogueService {
       )
       .subscribe({
         next: (pokemon: PokemonResponse) => {
-          StorageUtil.save(StorageKeys.NextPage, pokemon.next);
+          this._pokemon = [];
+
           for (const newPokemon of pokemon.results) {
+
             const pokemonId: number = Number(newPokemon.url.split("/")[6]) || 0;
             const imageUrl: string = environment.apiImage + pokemonId + ".png";
+
             this._pokemon.push({
               id: pokemonId,
-              name: newPokemon.name,
+              name: newPokemon.name.match(/^[a-z]*/i)!.join(""),
               image: imageUrl,
               url: newPokemon.url
             })
           }
-          console.log(this._pokemon);
+
+          console.log("Pokemon displayed: " + this._pokemon.length);
         },
         error: (error: HttpErrorResponse) => {
           this._error = error.message;
@@ -75,7 +83,6 @@ export class PokemonCatalogueService {
       })
   }
 
- 
   public pokemonByName(name: string): Pokemon | undefined {
     return this._pokemon.find((pokemon: Pokemon) => pokemon.name === name)
   }

@@ -22,6 +22,16 @@ export interface PokemonResponse {
     length: number;
 }
 
+export interface PokemonSummary {
+    id: number;
+    name: string;
+    stats: StatsResponse[];
+}
+
+export interface StatsResponse {
+    base_stat: number
+}
+
 export interface PokemonResult {
     name: string;
     url: string;
