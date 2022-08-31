@@ -1,6 +1,6 @@
 <li *ngIf="pokemon" 
     [ngClass]="{'border-white': isInTeam, 'border-red-700': !isInTeam}"
-    class="relative h-52 w-full bg-red-600 border-4 p-3 shadow rounded-lg flex flex-col justify-between items-center">
+    class="relative h-52 min-w-52 w-full bg-red-600 border-4 p-3 shadow rounded-lg flex flex-col justify-between items-center">
     
     <!-- Pokeball -->
     <div class="absolute top-0 bottom-0 w-full p-2 flex flex-row justify-start">
@@ -10,9 +10,9 @@
     </div>
 
     <div class="h-full w-full absolute top-0 bottom-0 flex flex-col justify-evenly items-center">
+        
+        <!-- Pokemon Sprite -->
         <section class="flex items-center">
-    
-            <!-- Pokemon Sprite -->
             <img src={{pokemon.image}} alt={{pokemon.name}}>
         </section>
     

@@ -1,0 +1,13 @@
+<div class="flex flex-row justify-center gap-4 my-4">
+    <nav aria-label="Catalogue pagination">
+      <ul class="flex list-style-none">
+
+        <li *ngFor="let element of paginationElements" (click)="onPageClicked(element)" class="page-item">
+            <a class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-200 text-white hover:text-red-400 hover:cursor-pointer">
+                {{ toNumber(element) }}
+            </a>
+        </li>
+
+      </ul>
+    </nav>
+  </div>

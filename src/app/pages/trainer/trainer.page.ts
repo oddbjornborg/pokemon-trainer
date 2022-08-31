@@ -20,14 +20,14 @@ export class TrainerPage implements OnInit {
     }
 
     if(this.trainerService.hasCachedData === false) {
-      console.log("No data cache found; fetching data...")
+      // console.log("Trainer >> No cache found")
 
       this.trainerService.getPokemonTeam();
       this.trainerService.pokemonTracker = this.trainerService.trainer!.pokemon;
       this.trainerService.hasCachedData = true;
     }
     else{
-      console.log("Data cache found!")
+      // console.log("Trainer >> Data cache loaded")
     }
   }
 

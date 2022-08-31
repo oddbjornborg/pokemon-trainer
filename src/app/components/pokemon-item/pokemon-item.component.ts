@@ -25,7 +25,7 @@ export class PokemonItemComponent implements OnInit {
   }
 
   get isVisible(): boolean {
-    return this._buttonState !== ButtonState.Hidden
+    return this._buttonState !== ButtonState.Hidden;
   }
 
   get isBeingAdded(): boolean {
@@ -40,7 +40,7 @@ export class PokemonItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.isInTeam = this.trainerService.inTeam(this.pokemon!.name)
+    this.isInTeam = this.trainerService.inTeam(this.pokemon!.name);
 
     this._buttonState = this.isInTeam ? ButtonState.Present : ButtonState.Hidden;
   }
@@ -75,7 +75,7 @@ export class PokemonItemComponent implements OnInit {
           this.isInTeam = this.trainerService.inTeam(this.pokemon!.name)
         },
         error: (error: HttpErrorResponse) =>{
-          console.log('ERROR', error.message)
+          console.log('ERROR', error.message);
         }
       })
   }
