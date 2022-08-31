@@ -28,6 +28,10 @@ export class PokemonItemComponent implements OnInit {
     return this._buttonState !== ButtonState.Hidden
   }
 
+  get isBeingAdded(): boolean {
+    return this._buttonState === ButtonState.BeingAdded;
+  }
+
   @Input() pokemon?: Pokemon;
  
   constructor(
@@ -54,7 +58,10 @@ export class PokemonItemComponent implements OnInit {
     this.isInTeam = !this.isInTeam;
 
     if(this.isInTeam) {
-      this._buttonState = ButtonState.Present;
+      this._buttonState = ButtonState.BeingAdded;
+      setTimeout(() => {
+        this._buttonState = ButtonState.Present;
+      }, 1000)
     }
 
     this.favoritesService.addToFavorites(this.pokemon!.name)

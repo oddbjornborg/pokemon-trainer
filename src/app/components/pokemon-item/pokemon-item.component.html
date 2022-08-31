@@ -1,40 +1,48 @@
 <li *ngIf="pokemon" 
-    [ngClass]="{'ring-white': isInTeam, 'ring-red-700': !isInTeam}"
-    class="bg-red-600 ring-4 my-6 p-3 shadow rounded flex justify-between items-center">
-
-    <div class="relative flex items-center">
-        <!-- Pokeball -->
+    [ngClass]="{'border-white': isInTeam, 'border-red-700': !isInTeam}"
+    class="relative h-52 w-full bg-red-600 border-4 p-3 shadow rounded-lg flex flex-col justify-between items-center">
+    
+    <!-- Pokeball -->
+    <div class="absolute top-0 bottom-0 w-full p-2 flex flex-row justify-start">
         <img *ngIf="isVisible" src="assets/img/pokeball_sprite.png" alt="pokeball"
-            [ngClass]="{'animate__fadeOut': isBeingRemoved, 'animate__rotateIn': isVisible && !isBeingRemoved}" 
-            class="w-8 h-8 animate__animated animate__rotateIn">
-
-        <!-- Pokemon Sprite -->
-        <img src={{pokemon.image}} alt={{pokemon.name}}>
+            [ngClass]="{'animate__fadeOut': isBeingRemoved, 'animate__rotateIn': isBeingAdded}" 
+            class="w-8 h-8 animate__animated">
     </div>
 
-    <!-- Pokemon Name -->
-    <section class="text-xl text-white uppercase">
-        <span>{{ pokemon!.name }}</span>
-    </section>
+    <div class="h-full w-full absolute top-0 bottom-0 flex flex-col justify-evenly items-center">
+        <section class="flex items-center">
+    
+            <!-- Pokemon Sprite -->
+            <img src={{pokemon.image}} alt={{pokemon.name}}>
+        </section>
+    
+        <!-- Pokemon Name -->
+        <section class="text-xl text-white uppercase">
+            <span>{{ pokemon!.name }}</span>
+        </section>
+    
+        <!-- Buttons -->
+        <section>
+            <div class="flex flex-row justify-evenly w-full">
+                
+                <ng-container *ngIf="isInTeam; then removeFromTeam else addToTeam"></ng-container>
+                
+                <ng-template #addToTeam>
+                    <button (click)="onIChooseYouClick()" class="mx-2 p-2 bg-blue-500 rounded w-20" [disabled]="loading">
+                        Add
+                    </button>
+                </ng-template>
+                
+                <ng-template #removeFromTeam>
+                    <button (click)="onIChooseYouClick()" class="mx-2 p-2 bg-red-500 rounded w-20" [disabled]="loading">
+                        Remove
+                    </button>
+                </ng-template>
+                
+                <button type="button" class="mx-2 p-2 bg-green-500 rounded w-20">Summary</button>
+            
+            </div>
+        </section>
+    </div>
 
-    <!-- Buttons -->
-    <section>
-        <div class="flex flex-col justify-center gap-2">
-            <button type="button" class="mx-2 p-2 bg-green-500 rounded">Stats</button>
-    
-            <ng-container *ngIf="isInTeam; then removeFromTeam else addToTeam"></ng-container>
-    
-            <ng-template #addToTeam>
-                <button (click)="onIChooseYouClick()" class="mx-2 p-2 bg-blue-500 rounded w-24" [disabled]="loading">
-                    Add
-                </button>
-            </ng-template>
-    
-            <ng-template #removeFromTeam>
-                <button (click)="onIChooseYouClick()" class="mx-2 p-2 bg-red-500 rounded w-24" [disabled]="loading">
-                    Remove
-                </button>
-            </ng-template>
-        </div>
-    </section>
 </li>
