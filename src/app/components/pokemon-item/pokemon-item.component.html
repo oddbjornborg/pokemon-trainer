@@ -13,7 +13,7 @@
         
         <!-- Pokemon Sprite -->
         <section class="flex items-center">
-            <img src={{pokemon.image}} alt={{pokemon.name}}>
+            <img src={{pokemon.image}} onerror="this.onerror=null; this.src='assets/img/missingno.png'" alt={{pokemon.name}} class="h-24">
         </section>
     
         <!-- Pokemon Name -->
