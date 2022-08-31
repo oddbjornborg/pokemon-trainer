@@ -14,8 +14,14 @@ const { apiPokemon } = environment
 export class PokemonCatalogueService {
 
   private _pokemon: Pokemon[] = [];
+  private _lastAccessedPage: number | undefined;
+  private _limit: number = 20;
   private _error: string = "";
   private _loading: boolean = false;
+
+  get lastAccessedPage(): number | undefined {
+    return this._lastAccessedPage;
+  }
 
   get pokemon(): Pokemon[] {
     return this._pokemon;
@@ -33,9 +39,16 @@ export class PokemonCatalogueService {
     private readonly http: HttpClient
   ) { }
 
-  public fetchPokemonOnPageLoad() {
+  public fetchPokemonPage(currentPage: number) {
+
+    if(this._lastAccessedPage !== undefined && this._lastAccessedPage === currentPage) {
+      return;
+    }
+
+    this._lastAccessedPage = currentPage;
     this._loading = true;
-    this.http.get<PokemonResponse>(apiPokemon + "?limit=20&offset=0")
+
+    this.http.get<PokemonResponse>(apiPokemon + "?limit=" + this._limit + "&offset=" + this._limit * currentPage)
       .pipe(
         finalize(() => {
           this._loading = false;
