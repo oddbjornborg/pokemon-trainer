@@ -19,6 +19,14 @@ export interface PokemonResponse {
     next: string | null;
     previous: string | null;
     results: PokemonResult[];
+    length: number;
+}
+
+export interface PokemonSummary {
+    count: number;
+    next: string | null;
+    previous: string | null;
+    results: PokemonResult[];
     stats: StatsResponse[];
     length: number;
 }
