@@ -27,7 +27,7 @@ export class FavoriteService {
     const pokemon: Pokemon | undefined = this.pokemonService.pokemonByName(name);
 
     if (!pokemon) {
-      throw new Error('addToFavorites: No pokemon with id: ' + name);
+      throw new Error('addToFavorites: No pokemon with name: ' + name);
     }
 
     if (this.trainerService.inTeam(name)) {

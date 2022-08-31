@@ -1,28 +1,36 @@
-<li *ngIf="pokemon" class="bg-slate-200 my-4 p-3 shadow rounded flex justify-between items-center ">
+<li *ngIf="pokemon" 
+    [ngClass]="{'ring-white': isInTeam, 'ring-red-700': !isInTeam}"
+    class="bg-red-600 ring-4 my-6 p-3 shadow rounded flex justify-between items-center">
 
     <section class="flex items-center">
         <img src={{pokemon.image}} alt={{pokemon.name}} />
-        <img *ngIf="isFavorite" src="assets/img/pokeball.png" alt="pokeball"
-            class="w-10 h-10 animate__animated animate__bounceInRight" />
+        <img *ngIf="isVisible" src="assets/img/pokeball_sprite.png" alt="pokeball"
+            [ngClass]="{'animate__fadeOut': isBeingRemoved, 'animate__rotateIn': isVisible && !isBeingRemoved}" class="w-10 h-10 animate__animated animate__rotateIn" />
     </section>
 
-    <section class="text-xl">
+    <section class="text-xl text-white uppercase">
         <span>{{ pokemon!.name }}</span>
     </section>
 
     <section>
 
-        <button type="button" class="mx-2 p-2 bg-green-500 rounded">Stats</button>
+        <div class="flex flex-col justify-center gap-2">
+            <button type="button" class="mx-2 p-2 bg-green-500 rounded">Stats</button>
+    
+            <ng-container *ngIf="isInTeam; then removeFromTeam else addToTeam"></ng-container>
+    
+            <ng-template #addToTeam>
+                <button (click)="onIChooseYouClick()" class="mx-2 p-2 bg-blue-500 rounded w-24" [disabled]="loading">
+                    Add
+                </button>
+            </ng-template>
+    
+            <ng-template #removeFromTeam>
+                <button (click)="onIChooseYouClick()" class="mx-2 p-2 bg-red-500 rounded w-24" [disabled]="loading">
+                    Remove
+                </button>
+            </ng-template>
+        </div>
 
-        <ng-container *ngIf="isFavorite; then removeFromTeam else addToTeam"></ng-container>
-
-        <ng-template #addToTeam>
-            <button (click)="onIChooseYouClick()" class="mx-2 p-2 bg-blue-500 rounded">I choose you!</button>
-        </ng-template>
-
-        <ng-template #removeFromTeam>
-            <button (click)="onIChooseYouClick()" class="mx-2 p-2 bg-red-500 rounded">Dispatch from team
-            </button>
-        </ng-template>
     </section>
 </li>

@@ -1,0 +1,9 @@
+.animate__flash {
+    --animation-duration: 500;
+    --animation-delay: 0;
+}
+
+.animate__flipInY {
+    --animation-duration: 500;
+    --animation-delay: 0;
+}
