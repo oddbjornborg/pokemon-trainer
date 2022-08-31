@@ -19,7 +19,12 @@ export interface PokemonResponse {
     next: string | null;
     previous: string | null;
     results: PokemonResult[];
+    stats: StatsResponse[];
     length: number;
+}
+
+export interface StatsResponse {
+    base_stat: number
 }
 
 export interface PokemonResult {
