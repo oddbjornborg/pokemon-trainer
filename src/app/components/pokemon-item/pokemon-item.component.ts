@@ -48,7 +48,7 @@ export class PokemonItemComponent implements OnInit {
       this._buttonState = ButtonState.BeingRemoved;
       setTimeout(() => {
         this._buttonState = ButtonState.Hidden;
-      }, 500);
+      }, 250);
     }
 
     this.isInTeam = !this.isInTeam;

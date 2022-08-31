@@ -31,10 +31,8 @@ export class FavoriteService {
     }
 
     if (this.trainerService.inTeam(name)) {
-      console.log("Pokemon already in team; removed from team.")
       this.trainerService.removePokemon(name);
     } else {
-      console.log("Added pokemon to team!")
       this.trainerService.addPokemon(pokemon);
     }
 

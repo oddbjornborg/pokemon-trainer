@@ -1,9 +1,11 @@
-.animate__flash {
-    --animation-duration: 500;
-    --animation-delay: 0;
+.animate__fadeOut {
+    --animate-duration: 250ms;
 }
 
-.animate__flipInY {
-    --animation-duration: 500;
-    --animation-delay: 0;
+.animate_flash {
+    --animate-duration: 500ms;
+}
+
+.animate__RotateIn {
+    --animate-duration: 250ms;
 }

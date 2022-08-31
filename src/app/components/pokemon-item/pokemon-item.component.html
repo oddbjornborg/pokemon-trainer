@@ -2,18 +2,23 @@
     [ngClass]="{'ring-white': isInTeam, 'ring-red-700': !isInTeam}"
     class="bg-red-600 ring-4 my-6 p-3 shadow rounded flex justify-between items-center">
 
-    <section class="flex items-center">
-        <img src={{pokemon.image}} alt={{pokemon.name}} />
+    <div class="relative flex items-center">
+        <!-- Pokeball -->
         <img *ngIf="isVisible" src="assets/img/pokeball_sprite.png" alt="pokeball"
-            [ngClass]="{'animate__fadeOut': isBeingRemoved, 'animate__rotateIn': isVisible && !isBeingRemoved}" class="w-10 h-10 animate__animated animate__rotateIn" />
-    </section>
+            [ngClass]="{'animate__fadeOut': isBeingRemoved, 'animate__rotateIn': isVisible && !isBeingRemoved}" 
+            class="w-8 h-8 animate__animated animate__rotateIn">
 
+        <!-- Pokemon Sprite -->
+        <img src={{pokemon.image}} alt={{pokemon.name}}>
+    </div>
+
+    <!-- Pokemon Name -->
     <section class="text-xl text-white uppercase">
         <span>{{ pokemon!.name }}</span>
     </section>
 
+    <!-- Buttons -->
     <section>
-
         <div class="flex flex-col justify-center gap-2">
             <button type="button" class="mx-2 p-2 bg-green-500 rounded">Stats</button>
     
@@ -31,6 +36,5 @@
                 </button>
             </ng-template>
         </div>
-
     </section>
 </li>
