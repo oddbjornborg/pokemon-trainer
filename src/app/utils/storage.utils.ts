@@ -18,4 +18,8 @@ export class StorageUtil {
         return undefined;
     }
 
+    public static clear(): void {
+        sessionStorage.clear();
+    }
+
 }
