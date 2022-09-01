@@ -8,7 +8,7 @@ import { PokemonStats} from 'src/app/models/pokemon.model';
   styleUrls: ['./pokemon-stats.component.css'],
 })
 export class PokemonStatsComponent implements OnInit {
-  @Input() pokemonStats!: PokemonStats;
+  @Input() pokemonStats: PokemonStats | undefined;
 
   constructor() {}
 
