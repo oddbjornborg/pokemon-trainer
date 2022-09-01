@@ -10,6 +10,7 @@ import { TrainerService } from 'src/app/services/trainer.service';
 export class PokemonTeamItemComponent implements OnInit {
 
   private _beingRemoved: boolean = false;
+  public removeButtonHovered: boolean = false;
 
   get beingRemoved(): boolean {
     return this._beingRemoved;

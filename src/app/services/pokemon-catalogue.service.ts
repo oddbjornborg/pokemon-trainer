@@ -69,7 +69,7 @@ export class PokemonCatalogueService {
 
             this._pokemon.push({
               id: pokemonId,
-              name: newPokemon.name.match(/^[a-z]*/i)!.join(""),
+              name: newPokemon.name,
               image: imageUrl,
               url: newPokemon.url
             })

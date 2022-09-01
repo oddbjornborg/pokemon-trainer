@@ -80,7 +80,7 @@ export class PaginationService {
       }
     }
     else if(this._finalPage !== undefined && this._currentPage > this._finalPage - 2) {
-      for(let i = -5; i < 0; i++) {
+      for(let i = -4; i <= 0; i++) {
         this._paginationElements.push(String(this._finalPage + i));
       }
     }

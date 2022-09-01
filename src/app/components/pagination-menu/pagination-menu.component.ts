@@ -58,4 +58,11 @@ export class PaginationMenuComponent implements OnInit {
     return element;
   }
 
+  public isCurrentPage(element: string): boolean {
+    if(!/[0-9]/.test(element)) {
+      return false;
+    }
+    return Number(element) === this.currentPage;
+  }
+
 }
