@@ -1,6 +1,6 @@
 <li *ngIf="pokemon" 
     [ngClass]="{'border-white': isInTeam, 'border-red-700': !isInTeam}"
-    class="relative h-52 min-w-52 w-full bg-red-600 border-4 p-3 shadow rounded-lg flex flex-col justify-between items-center">
+    class="relative h-52 min-w-52 w-full bg-red-600 border-4 p-3 shadow rounded-lg flex flex-col justify-between items-center transition-all duration-200">
     
     <!-- Pokeball -->
     <div class="absolute top-0 bottom-0 w-full p-2 flex flex-row justify-start">
@@ -12,8 +12,13 @@
     <div class="h-full w-full absolute top-0 bottom-0 flex flex-col justify-evenly items-center">
         
         <!-- Pokemon Sprite -->
-        <section class="flex items-center">
-            <img src={{pokemon.image}} onerror="this.onerror=null; this.src='assets/img/missingno.png'" alt={{pokemon.name}} class="h-24">
+        <section class="flex items-center animate__animated" 
+        [ngClass]="{'animate__headShake': imageHovered, 'animate__shakeY': imageAnimatedAdd}"
+        (pointerenter)="onImageHover()">
+            <img src={{pokemon.image}} 
+            onerror="this.onerror=null; this.src='assets/img/missingno.png'" 
+            alt={{pokemon.name}} 
+            class="h-24">
         </section>
     
         <!-- Pokemon Name -->
@@ -28,18 +33,25 @@
                 <ng-container *ngIf="isInTeam; then removeFromTeam else addToTeam"></ng-container>
                 
                 <ng-template #addToTeam>
-                    <button (click)="onIChooseYouClick()" class="mx-2 p-2 bg-blue-500 rounded w-20" [disabled]="loading">
+                    <button (click)="onIChooseYouClick()" 
+                    class="mx-2 p-2 bg-blue-500 rounded w-20 border-2 border-white hover:bg-blue-400 transition-colors duration-200" 
+                    [disabled]="loading">
                         Add 
                     </button>
                 </ng-template>
                 
                 <ng-template #removeFromTeam>
-                    <button (click)="onIChooseYouClick()" class="mx-2 p-2 bg-red-500 rounded w-20" [disabled]="loading">
+                    <button (click)="onIChooseYouClick()" type="button"
+                    class="mx-2 p-2 bg-red-500 rounded w-20 border-2 border-white hover:bg-red-400  transition-colors duration-200" 
+                    [disabled]="loading">
                         Remove
                     </button>
                 </ng-template>
                 
-                <button (click)="onSummaryClick(pokemon)" type="button" class="mx-2 p-2 bg-green-500 rounded w-20">Summary</button>
+                <button (click)="onSummaryClick(pokemon)" type="button" 
+                class="mx-2 p-2 bg-green-500 rounded w-20 border-2 border-white hover:bg-green-400  transition-colors duration-200">
+                    Summary
+                </button>
             
             </div>
         </section>

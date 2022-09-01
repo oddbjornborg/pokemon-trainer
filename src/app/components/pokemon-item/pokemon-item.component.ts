@@ -19,12 +19,11 @@ export class PokemonItemComponent implements OnInit {
   public isInTeam: boolean = false;
   private _buttonState: number = 0;
 
+  public imageHovered: boolean = false;
+  public imageAnimatedAdd: boolean = false;
+
   get isBeingRemoved(): boolean {
     return this._buttonState === ButtonState.BeingRemoved;
-  }
-
-  get isPresent(): boolean {
-    return this._buttonState === ButtonState.Present;
   }
 
   get isVisible(): boolean {
@@ -38,37 +37,23 @@ export class PokemonItemComponent implements OnInit {
   @Input() pokemon?: Pokemon;
  
   constructor(
-    private trainerService: TrainerService,
+    private readonly trainerService: TrainerService,
     private readonly favoritesService: FavoriteService,
-    private router: Router,
+    private readonly router: Router,
     private readonly summaryService: PokemonSummaryService
   ) { }
 
   ngOnInit(): void {
     this.isInTeam = this.trainerService.inTeam(this.pokemon!.name)
-
     this._buttonState = this.isInTeam ? ButtonState.Present : ButtonState.Hidden;
-    
   }
 
   onIChooseYouClick() : void {
     this.loading = true;
     this.isInTeam = !this.isInTeam;
 
-    // Animate adding pokeball
-    if(this.isInTeam) {
-      this._buttonState = ButtonState.BeingAdded;
-      setTimeout(() => {
-        this._buttonState = ButtonState.Present;
-      }, 1000)
-    } 
-    // Animate pokeball removal
-    else {
-      this._buttonState = ButtonState.BeingRemoved;
-      setTimeout(() => {
-        this._buttonState = ButtonState.Hidden;
-      }, 250);
-    }
+    this.addImageAnim();
+    this.pokeballAnim();
 
     this.favoritesService.addToFavorites(this.pokemon!.name)
       .pipe(
@@ -89,6 +74,41 @@ export class PokemonItemComponent implements OnInit {
   onSummaryClick(pokemon: Pokemon): void{
     this.summaryService.fetchPokemonStats(pokemon)
     this.router.navigateByUrl("/summary")
+  }
+
+  onImageHover(): void {
+    if(this.imageHovered === true) {
+      return
+    }
+
+    this.imageHovered = true;
+    setTimeout(() => {
+      this.imageHovered = false;
+    }, 1000);
+  }
+
+  addImageAnim(): void {
+    if(this.isInTeam) {
+      this.imageAnimatedAdd = true;
+      setTimeout(() => {
+        this.imageAnimatedAdd = false;
+      }, 1000)
+    }
+  }
+
+  pokeballAnim(): void {
+    if(this.isInTeam) {
+      this._buttonState = ButtonState.BeingAdded;
+      setTimeout(() => {
+        this._buttonState = ButtonState.Present;
+      }, 250)
+    } 
+    else {
+      this._buttonState = ButtonState.BeingRemoved;
+      setTimeout(() => {
+        this._buttonState = ButtonState.Hidden;
+      }, 250);
+    }
   }
 
 }

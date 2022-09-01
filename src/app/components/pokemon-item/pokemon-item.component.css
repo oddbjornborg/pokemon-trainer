@@ -2,10 +2,10 @@
     --animate-duration: 250ms;
 }
 
-.animate_flash {
-    --animate-duration: 500ms;
+.animate__rotateIn {
+    --animate-duration: 250ms;
 }
 
-.animate__RotateIn {
-    --animate-duration: 250ms;
+.animate__flash {
+    --animate-duration: 500ms;
 }
