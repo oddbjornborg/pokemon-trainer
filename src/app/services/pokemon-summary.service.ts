@@ -1,7 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { finalize, Observable } from 'rxjs';
+import { StorageKeys } from '../enums/storage-keys.enum';
 import { Pokemon, PokemonStats, PokemonSummary } from '../models/pokemon.model';
+import { StorageUtil } from '../utils/storage.utils';
 
 @Injectable({
   providedIn: 'root',
@@ -39,6 +41,7 @@ export class PokemonSummaryService {
           special_defense: response.stats[4].base_stat,
           speed: response.stats[5].base_stat,
         };
+        StorageUtil.save(StorageKeys.PokemonSummary, this._pokemonStats);
       },
       error: (error: HttpErrorResponse) => {
         console.log(error);
