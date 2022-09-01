@@ -11,19 +11,15 @@ import { StorageUtil } from 'src/app/utils/storage.utils';
 })
 export class SummaryPage implements OnInit {
 
-  public stats: PokemonStats | undefined;
+  get stats(): PokemonStats {
+    return this.pokemonSummaryService.stats;
+  }
 
   constructor(
     private readonly pokemonSummaryService: PokemonSummaryService
   ) {}
 
   ngOnInit(): void {
-    const storedSummary = StorageUtil.read<PokemonStats>(StorageKeys.PokemonSummary);
-    if(storedSummary === undefined) {
-      this.stats = this.pokemonSummaryService.stats;
-    }
-    else {
-      this.stats = storedSummary;
-    }
+    this.pokemonSummaryService.fetchPokemonStats();
   }
 }

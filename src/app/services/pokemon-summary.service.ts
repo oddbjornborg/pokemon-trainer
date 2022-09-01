@@ -10,6 +10,11 @@ import { StorageUtil } from '../utils/storage.utils';
 export class PokemonSummaryService {
   private _pokemonSummary?: PokemonSummary;
   private _pokemonStats?: PokemonStats;
+  private _pokemon: Pokemon | undefined;
+
+  set pokemon(newValue: Pokemon) {
+    this._pokemon = newValue;
+  }
 
   constructor(private readonly http: HttpClient) {}
 
@@ -21,7 +26,14 @@ export class PokemonSummaryService {
     return this._pokemonStats!;
   }
 
-  public fetchPokemonStats(pokemon: Pokemon) {
+  public fetchPokemonStats() {
+
+    const pokemon = this._pokemon!;
+    const cachedPokemon: PokemonStats | undefined = StorageUtil.read<PokemonStats>(StorageKeys.PokemonSummary);
+
+    if(cachedPokemon && cachedPokemon.name === pokemon.name) {
+      this._pokemonStats = cachedPokemon;
+    }
     
     this.http.get<PokemonSummary>(pokemon.url).subscribe({
       
@@ -40,7 +52,6 @@ export class PokemonSummaryService {
         };
         
         StorageUtil.save(StorageKeys.PokemonSummary, this._pokemonStats);
-        StorageUtil.clear()
       },
       error: (error: HttpErrorResponse) => {
         console.log(error);

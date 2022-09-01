@@ -72,8 +72,8 @@ export class PokemonItemComponent implements OnInit {
   }
 
   onSummaryClick(pokemon: Pokemon): void{
-    this.summaryService.fetchPokemonStats(pokemon)
-    this.router.navigateByUrl("/summary")
+    this.summaryService.pokemon = pokemon;
+    this.router.navigateByUrl("/summary");
   }
 
   onImageHover(): void {
