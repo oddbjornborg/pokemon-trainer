@@ -1,32 +1,53 @@
-# PokemonTrainer
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+# NgPokemon
+This is Angular prosject for Noroff assignment. The purpose of the assignment is to get familiar with Angular and fetch data from api using HttpClient.
 
-## Development server
+The goal of the application is to create Pokemon trainer page using Angular. The application should consist of a landing page, trainer page, and catalogue page.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Authors
 
-## Code scaffolding
+- [@Oddbjørn S. Borge-Jensen](https://github.com/oddbjornborg/pokemon-trainer)
+- [@Chonlawit With-Pettersen](https://github.com/oddbjornborg/pokemon-trainer)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## API Reference
 
-## Build
+#### Get pokemon pagination
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```http
+  GET https://pokeapi.co/api/v2/pokemon/?limit=20&offset=20/
+```
 
-## Running unit tests
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `limit`   | `string` |                            |
+| `offset`  | `string` |                             |
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+#### Get pokemon image
 
-## Running end-to-end tests
+```http
+  GET https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of image to fetch
 
 
 
-Halla! yo
-1
+#### Get trainers
+
+```http
+  GET https://osb-assignment-api.herokuapp.com/trainers
+```
+## Installation
+
+Install 
+pokemon-trainer with npm
+
+```bash
+  cd pokemon-trainer
+  npm install
+  ng serve --open
+  
+```
+    
