@@ -1,4 +1,8 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { StorageKeys } from '../enums/storage-keys.enum';
@@ -31,14 +35,12 @@ export class TrainerService {
     return this._pokemon;
   }
 
-  constructor(
-    private readonly http: HttpClient,
-  ) {
+  constructor(private readonly http: HttpClient) {
     this._trainer = StorageUtil.read<Trainer>(StorageKeys.Trainer);
   }
 
   public addPokemon(pokemon: Pokemon) {
-    if(this._trainer) {
+    if (this._trainer) {
       this._pokemon.push(pokemon);
       this._trainer.pokemon.push(pokemon.name);
       StorageUtil.save<Pokemon[]>(StorageKeys.PokemonTeam, this._pokemon);
@@ -48,9 +50,11 @@ export class TrainerService {
   }
 
   public removePokemon(name: string) {
-    if(this._trainer) {
+    if (this._trainer) {
       this._pokemon = this._pokemon.filter((pokemon) => pokemon.name !== name);
-      this._trainer.pokemon = this._trainer.pokemon.filter(pokemonName => pokemonName !== name);
+      this._trainer.pokemon = this._trainer.pokemon.filter(
+        (pokemonName) => pokemonName !== name
+      );
       StorageUtil.save<Pokemon[]>(StorageKeys.PokemonTeam, this._pokemon);
       StorageUtil.save<Trainer>(StorageKeys.Trainer, this._trainer);
       this.patchTrainerInAPI();
@@ -76,49 +80,46 @@ export class TrainerService {
   }
 
   public inTeam(name: string): boolean {
-    if(this._trainer) {
+    if (this._trainer) {
       return Boolean(
         this._trainer.pokemon.find((pokemonName) => pokemonName === name)
       );
-    } 
+    }
     return false;
   }
 
   private addPokemonToTeamByName(name: string) {
+    const url = apiPokemon + '/' + name;
 
-    const url = apiPokemon + "/" + name;
+    this.http.get<PokemonByNameResponse>(url).subscribe({
+      next: (response: PokemonByNameResponse) => {
+        const { id, name } = response;
+        const { front_default: image } = response.sprites;
 
-    this.http.get<PokemonByNameResponse>(url)
-      .subscribe({
-        next: (response: PokemonByNameResponse) => {
-          const { id, name } = response;
-          const { front_default: image } = response.sprites;
-
-          this.addPokemon({
-            id,
-            name,
-            image,
-            url
-          })
-        },
-        error: (err: HttpErrorResponse) => {
-          console.log(err);
-        }
-      })
+        this.addPokemon({
+          id,
+          name,
+          image,
+          url,
+        });
+      },
+      error: (err: HttpErrorResponse) => {
+        console.log(err);
+      },
+    });
   }
 
   private patchTrainerInAPI(): void {
-
-    if(this._trainer) {
+    if (this._trainer) {
       const headers = new HttpHeaders({
-        "Content-Type": "application/json",
-        "x-api-key": apiKey
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
       });
 
-      const url = apiTrainers + "/" + this._trainer?.id;
+      const url = apiTrainers + '/' + this._trainer?.id;
 
       const team: TrainerTeam = { pokemon: [] };
-      team.pokemon = this._trainer.pokemon; 
+      team.pokemon = this._trainer.pokemon;
 
       this.http.patch<Trainer>(url, team, { headers })
         .subscribe({
