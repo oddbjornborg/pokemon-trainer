@@ -22,8 +22,11 @@ export class PokemonSummaryService {
   }
 
   public fetchPokemonStats(pokemon: Pokemon) {
+    
     this.http.get<PokemonSummary>(pokemon.url).subscribe({
+      
       next: (response: PokemonSummary) => {
+        
         this._pokemonSummary = response;
         this._pokemonStats = {
           image: pokemon.image,
@@ -35,7 +38,9 @@ export class PokemonSummaryService {
           special_defense: response.stats[4].base_stat,
           speed: response.stats[5].base_stat,
         };
+        
         StorageUtil.save(StorageKeys.PokemonSummary, this._pokemonStats);
+        StorageUtil.clear()
       },
       error: (error: HttpErrorResponse) => {
         console.log(error);
