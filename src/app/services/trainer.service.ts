@@ -122,9 +122,6 @@ export class TrainerService {
 
       this.http.patch<Trainer>(url, team, { headers })
         .subscribe({
-          next: (res) => {
-            console.log(res);
-          },
           error: (err: HttpErrorResponse) => {
             throw new Error("ERROR: " + err.message);
           }
