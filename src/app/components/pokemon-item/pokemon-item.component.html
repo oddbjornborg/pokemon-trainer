@@ -29,7 +29,7 @@
                 
                 <ng-template #addToTeam>
                     <button (click)="onIChooseYouClick()" class="mx-2 p-2 bg-blue-500 rounded w-20" [disabled]="loading">
-                        Add
+                        Add 
                     </button>
                 </ng-template>
                 
@@ -39,7 +39,7 @@
                     </button>
                 </ng-template>
                 
-                <button type="button" class="mx-2 p-2 bg-green-500 rounded w-20">Summary</button>
+                <button (click)="onSummaryClick(pokemon)" type="button" class="mx-2 p-2 bg-green-500 rounded w-20">Summary</button>
             
             </div>
         </section>

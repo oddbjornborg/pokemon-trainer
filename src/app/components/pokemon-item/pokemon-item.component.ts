@@ -1,10 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { ButtonState } from 'src/app/enums/button-state.enum';
 import { Pokemon} from 'src/app/models/pokemon.model';
 import { FavoriteService } from 'src/app/services/favorite.service';
+import { PokemonSummaryService } from 'src/app/services/pokemon-summary.service';
 import { TrainerService } from 'src/app/services/trainer.service';
+
 
 @Component({
   selector: 'app-pokemon-item',
@@ -36,13 +39,16 @@ export class PokemonItemComponent implements OnInit {
  
   constructor(
     private trainerService: TrainerService,
-    private readonly favoritesService: FavoriteService
+    private readonly favoritesService: FavoriteService,
+    private router: Router,
+    private readonly summaryService: PokemonSummaryService
   ) { }
 
   ngOnInit(): void {
-    this.isInTeam = this.trainerService.inTeam(this.pokemon!.name);
+    this.isInTeam = this.trainerService.inTeam(this.pokemon!.name)
 
     this._buttonState = this.isInTeam ? ButtonState.Present : ButtonState.Hidden;
+    
   }
 
   onIChooseYouClick() : void {
@@ -78,6 +84,11 @@ export class PokemonItemComponent implements OnInit {
           console.log('ERROR', error.message);
         }
       })
+  }
+
+  onSummaryClick(pokemon: Pokemon): void{
+    this.summaryService.fetchPokemonStats(pokemon)
+    this.router.navigateByUrl("/summary")
   }
 
 }

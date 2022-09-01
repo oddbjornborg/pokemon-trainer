@@ -6,6 +6,7 @@ import { CataloguePage } from "./pages/catalogue/catalogue.page";
 import { LandingPage } from "./pages/landing/landing.page";
 import { LoginPage } from "./pages/login/login.page";
 import { RegisterPage } from "./pages/register/register.page";
+import { SummaryPage } from "./pages/summary/summary.page";
 import { TrainerPage } from "./pages/trainer/trainer.page";
 
 const routes: Routes = [
@@ -33,6 +34,11 @@ const routes: Routes = [
     {
         path: "catalogue",
         component: CataloguePage,
+        canActivate: [ AuthGuard ]
+    },
+    {
+        path: "summary",
+        component: SummaryPage,
         canActivate: [ AuthGuard ]
     }
 ];
