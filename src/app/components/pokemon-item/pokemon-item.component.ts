@@ -72,7 +72,7 @@ export class PokemonItemComponent implements OnInit {
   }
 
   onSummaryClick(pokemon: Pokemon): void{
-    this.summaryService.pokemon = pokemon;
+    this.summaryService.pokemon = pokemon.name;
     this.router.navigateByUrl("/summary");
   }
 

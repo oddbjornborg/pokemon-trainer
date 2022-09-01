@@ -28,6 +28,11 @@ export interface PokemonSummary {
     id: number;
     name: string;
     stats: StatsResponse[];
+    sprites: SpriteModel;
+}
+
+interface SpriteModel {
+    front_default: string;
 }
 
 export interface StatsResponse {
