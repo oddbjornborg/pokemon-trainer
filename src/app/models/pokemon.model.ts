@@ -6,6 +6,8 @@ export interface Pokemon {
 }
 
 export interface PokemonStats {
+    image: string;
+    name: string;
     hp: number;
     attack: number;
     defense: number;

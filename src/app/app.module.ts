@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 
@@ -20,6 +20,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { TrainerComponent } from './components/trainer/trainer.component';
 import { PokemonStatsComponent } from './components/pokemon-stats/pokemon-stats.component';
 import { PaginationMenuComponent } from './components/pagination-menu/pagination-menu.component';
+import { SummaryPage } from './pages/summary/summary.page';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { PaginationMenuComponent } from './components/pagination-menu/pagination
     LoginFormComponent,
     LandingPage,
     RegisterPage,
+    SummaryPage,
     PokemonItemComponent,
     PokemonListComponent,
     RegisterFormComponent,
@@ -37,16 +39,11 @@ import { PaginationMenuComponent } from './components/pagination-menu/pagination
     PokemonTeamItemComponent,
     NavbarComponent,
     TrainerComponent,
+    PaginationMenuComponent,
     PokemonStatsComponent,
-    PaginationMenuComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
