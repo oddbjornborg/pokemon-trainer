@@ -74,8 +74,6 @@ export class PokemonCatalogueService {
               url: newPokemon.url
             })
           }
-
-          console.log("Pokemon displayed: " + this._pokemon.length);
         },
         error: (error: HttpErrorResponse) => {
           this._error = error.message;
