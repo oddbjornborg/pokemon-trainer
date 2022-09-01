@@ -1,12 +1,12 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { StorageKeys } from '../enums/storage-keys.enum';
 import { Pokemon, PokemonByNameResponse } from '../models/pokemon.model';
-import { Trainer } from '../models/trainer.model';
+import { Trainer, TrainerTeam } from '../models/trainer.model';
 import { StorageUtil } from '../utils/storage.utils';
 
-const { apiPokemon } = environment;
+const { apiPokemon, apiTrainers, apiKey } = environment;
 
 @Injectable({
   providedIn: 'root',
@@ -43,6 +43,7 @@ export class TrainerService {
       this._trainer.pokemon.push(pokemon.name);
       StorageUtil.save<Pokemon[]>(StorageKeys.PokemonTeam, this._pokemon);
       StorageUtil.save<Trainer>(StorageKeys.Trainer, this._trainer);
+      this.patchTrainerInAPI();
     }
   }
 
@@ -52,6 +53,7 @@ export class TrainerService {
       this._trainer.pokemon = this._trainer.pokemon.filter(pokemonName => pokemonName !== name);
       StorageUtil.save<Pokemon[]>(StorageKeys.PokemonTeam, this._pokemon);
       StorageUtil.save<Trainer>(StorageKeys.Trainer, this._trainer);
+      this.patchTrainerInAPI();
     }
   }
 
@@ -103,5 +105,33 @@ export class TrainerService {
           console.log(err);
         }
       })
+  }
+
+  private patchTrainerInAPI(): void {
+
+    if(this._trainer) {
+      const headers = new HttpHeaders({
+        "Content-Type": "application/json",
+        "x-api-key": apiKey
+      });
+
+      const url = apiTrainers + "/" + this._trainer?.id;
+
+      const team: TrainerTeam = { pokemon: [] };
+      team.pokemon = this._trainer.pokemon; 
+
+      this.http.patch<Trainer>(url, team, { headers })
+        .subscribe({
+          next: (res) => {
+            console.log(res);
+          },
+          error: (err: HttpErrorResponse) => {
+            throw new Error("ERROR: " + err.message);
+          }
+        })
+    }
+    else {
+      throw new Error("Tried to patch without an assigned trainer");
+    }
   }
 }

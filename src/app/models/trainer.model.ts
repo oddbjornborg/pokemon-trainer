@@ -4,5 +4,8 @@ export interface Trainer {
     id: number;
     username: string;
     pokemon: string[];
-    //pokemon: Pokemon[];
+}
+
+export interface TrainerTeam {
+    pokemon: string[]
 }
