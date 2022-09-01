@@ -3,9 +3,9 @@
       <ul class="flex list-style-none">
 
         <li *ngFor="let element of paginationElements" (click)="onPageClicked(element)" class="page-item">
-            <a [ngClass]="{'underline': isCurrentPage(element)}"
+            <a [ngClass]="{'underline disabled': isCurrentPage(element), 'hover:text-yellow-500': !isCurrentPage(element)}"
             class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none 
-            transition-all duration-200 text-white hover:text-red-400 hover:cursor-pointer">
+            transition-all duration-200 text-white hover:cursor-pointer">
               {{ toNumber(element) }}
             </a>
         </li>
